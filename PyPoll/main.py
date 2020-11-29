@@ -1,5 +1,9 @@
 #Import modules
 import pandas as pd
+import sys 
+
+stdoutOrigin=sys.stdout 
+sys.stdout = open("log.txt", "w")
 #Create reference to CSV file
 csvpath = "Resources/election_data.csv"
 #Import the CSV into a pandas DataFrame
@@ -10,7 +14,7 @@ print("-------------------------")
 total_votes = len(election_df.index)
 print(f"Total Votes: " + str(total_votes))
 print("-------------------------")
-#A complete list of candidates who received votes
+#The percentage of votes each candidate won, total number of votes each candidate won, winner of the election based on popular vote.
 
 candidates_names = election_df["Candidate"].unique()
 candidates_count = election_df["Candidate"].value_counts()
@@ -27,20 +31,20 @@ print("Winner:", winner)
 print("-------------------------")
 
 
+#Export a text file with the results
+sys.stdout.close()
+sys.stdout=stdoutOrigin
 
-# widths = [max(map(len, col)) for col in zip(*rows)]
-# for row in rows:
-#     print "  ".join((val.ljust(width) for val, width in zip(row, widths)))
-
-#indx = index.election_df["Candidate"].value_counts()
-#print(indx)
-
-
-
-#The percentage of votes each candidate won
-
-
-#The total number of votes each candidate won
-
-
-#The winner of the election based on popular vote.
+print("Election Results")
+print("-------------------------")
+print(f"Total Votes: " + str(total_votes))
+print("-------------------------")
+max = 0
+for i in range(0,len(candidates_percent)):
+    if max < candidates_count[i]:
+        max = candidates_count[i]
+        winner = candidates_names[i]
+    print(str(candidates_names[i])+':', candidates_percent[i], '('+ str(candidates_count[i])+ ')')
+print("-------------------------")
+print("Winner:", winner)
+print("-------------------------")
