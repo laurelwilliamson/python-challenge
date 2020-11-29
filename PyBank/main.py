@@ -1,10 +1,16 @@
 #Import pandas modules
 import pandas as pd
+import sys 
+
+stdoutOrigin=sys.stdout 
+sys.stdout = open("log.txt", "w")
 #Create reference to CSV file
 csvpath = "Resources/budget_data.csv"
 #Import the CSV into a pandas DataFrame
 budget_df = pd.read_csv(csvpath, low_memory=False)
 #Calculate the total number of months included in the dataset
+print("Financial Analysis")
+print("---------------------------")
 total_months = len(budget_df.index)
 print(f"Total Months:  " + str(total_months))
 #Calculate the net total amount of "Profit"/Losses" over the entire period'
@@ -32,6 +38,7 @@ Sum_of_Changes = budget_deltas[1]
 Average_Change = budget_deltas[2]
 
 
+#Find greatest increase in profits and greatest decrease in losses over entire period
 print(f"Average Change: $" + str(round(Average_Change, 2)))
 Greatest_Profit = max(Changes)
 Greatest_Loss = min(Changes)
@@ -44,18 +51,10 @@ date_profit = budget_df["Date"][indexChanges_Profit]
 
 print(f"Greatest Increase in Price: " + str(date_profit) + " ($" + str(Greatest_Profit) + ")")
 print(f"Greatest Decrease in Price: " + str(date_loss) + " ($" + str(Greatest_Loss) + ")")
-# new_ind = budget_df.set_index("Profit/Losses")
-
-# ind_df = budget_df.loc[budget_df["Profit/Losses"]==Greatest_Loss]
-# print(ind_df)
 
 
-
-
-#Find greatest increase in profits (date&amount) over entire period
-#Find greatest descease in losses (date&amount) over entire period
-#Print analysis to terminal
 #Export a text file with the results\
-
+sys.stdout.close()
+sys.stdout=stdoutOrigin
 
     
