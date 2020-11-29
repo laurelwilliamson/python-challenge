@@ -17,17 +17,23 @@ Profit_loss = budget_df["Profit/Losses"]
 
 def budget_change_avg(a1):
     Changes = []
-    Sum_of_Changes = sum(Changes)
     a, b =  0, 1
     while b<len(a1):
         delta = a1[b] - a1[a]
         Changes.append(delta)
         a = a+1
         b = b+1
-    return [Changes, Sum_of_Changes]
+    Sum_of_Changes = sum(Changes)
+    Average_Change = (Sum_of_Changes/len(Changes))
+    return [Changes, Sum_of_Changes, Average_Change]
 
-print(budget_change_avg(Profit_loss))
+budget_deltas = budget_change_avg(Profit_loss)
+Changes = budget_deltas[0]
+Sum_of_Changes = budget_deltas[1]
+Average_Change = budget_deltas[2]
 
+Greatest_Profit = max(Changes)
+print(Greatest_Profit)
 
 
 #Find greatest increase in profits (date&amount) over entire period
