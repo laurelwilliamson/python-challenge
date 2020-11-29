@@ -11,15 +11,29 @@ print(f"There are " + str(total_months) + " total months in the dataset.")
 #Calculate the net total amount of "Profit"/Losses" over the entire period'
 Total = budget_df["Profit/Losses"].sum()
 print(Total)
-#Calculate the changes in "Profits/Losses" over the entire period
-#For row in budget_df["Profit/Losses"]
-#skiprows = 0
+#Calculate the changes in "Profits/Losses" over the entire period and find their average
+Profit_loss = budget_df["Profit/Losses"]
 
 
-#^do the diff formula I think and then add each one to a list and then divide that list by 86 to get the thing?
-#Find the average of those changes
+def budget_change_avg(a1):
+    Changes = []
+    Sum_of_Changes = sum(Changes)
+    a, b =  0, 1
+    while b<len(a1):
+        delta = a1[b] - a1[a]
+        Changes.append(delta)
+        a = a+1
+        b = b+1
+    return [Changes, Sum_of_Changes]
+
+print(budget_change_avg(Profit_loss))
+
+
 
 #Find greatest increase in profits (date&amount) over entire period
 #Find greatest descease in losses (date&amount) over entire period
 #Print analysis to terminal
-#Export a text file with the results
+#Export a text file with the results\
+
+
+    
